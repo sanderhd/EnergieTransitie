@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect op basis van rol
     if ($user['role'] === 'admin') {
-      header("Location: admindash.php");
+      header("Location: admin_dashboard.php");
     } elseif ($user['role'] === 'klant') {
-      header("Location: dashboard.php");
+      header("Location: klant_dashboard.php");
     } else {
-      header("Location: dashboard.php");
+      header("Location: klant_dashboard.php");
     }
     exit;
   } else {

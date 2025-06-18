@@ -18,6 +18,7 @@
       <a id="register-text" href="register.php">Registreren</a>
     </nav>
   </header>
+      <div class="banner">
    <main>
     <section class="info-box">
       <div class="icon">

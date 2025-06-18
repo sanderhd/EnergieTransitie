@@ -14,8 +14,8 @@
       <span>Energie Transitie</span>
     </div>
     <nav>
-      <a href="#">Inloggen</a>
-      <a href="#">Registreren</a>
+      <a href="login.php">Inloggen</a>
+      <a href="register.php">Registreren</a>
     </nav>
   </header>
       <div class="banner">

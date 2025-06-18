@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else if ($user['role'] === 'klant') {
             header("Location: klant_dashboard.php");
         } else {
-            header("Location: algemene_dashboard.php");
+            header("Location: klant_dashboard.php");
         }
         exit;
     }
@@ -43,31 +43,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Energie Transitie - Registratie</title>
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="CSS/style.css" />
+  <meta charset="UTF-8">
+  <title>Energie Transitie - Registreren</title>
+  <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>
-    <div class="register">
-        <div class="register-left">
-            <img src="images/logo.png" alt="Logo" />
-        </div>
-
-        <div class="register-right">
-            <h1>Registreren</h1>
-
-            <form method="POST" action="">
-                <label for="username">Gebruikersnaam:</label> <br />
-                <input type="text" name="username" id="username" placeholder="Gebruikersnaam" required /> <br />
-
-                <label for="password">Wachtwoord:</label> <br />
-                <input type="password" name="password" id="password" placeholder="Wachtwoord" required /> <br />
-
-                <button type="submit">Registreren</button>
-            </form>
-        </div>
+<header>
+    <div class="logo">
+      <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+      <span>Energie Transitie</span>
     </div>
+    <nav>
+      <a href="login.php">Inloggen</a>
+      <a href="register.php">Registreren</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="left">
+      <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">
+    </div>
+    <div class="right">
+      <div class="login-box">
+        <h2>Registreren</h2>
+        <form method="post" action="register.php">
+          <label for="username">Gebruikersnaam:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Wachtwoord:</label>
+          <input type="password" id="password" name="password" required>
+          <a href="login.php" class="forgot">Heb je al account?</a>
+          <button type="submit">Registreren</button>
+        </form>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

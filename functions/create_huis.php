@@ -195,6 +195,5 @@ function setupAutocomplete(inputId, suggestId) {
 setupAutocomplete('bewoner1', 'suggest1');
 setupAutocomplete('bewoner2', 'suggest2');
 </script>
-
 </body>
 </html>

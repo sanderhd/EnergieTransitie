@@ -8,13 +8,27 @@
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
+<header>
+    <div class="logo">
+      <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+      <span>Energie Transitie</span>
+    </div>
     <nav>
-        <a href="index.php"><img src="images/logo.png"> <h1>Energie Transitie</h1></a>
-
-        <div class="nav-right">
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
-        </div>
+      <a id="login-text" href="login.php">Inloggen</a>
+      <a id="register-text" href="register.php">Registreren</a>
     </nav>
+  </header>
+      <div class="banner">
+   <main>
+    <section class="info-box">
+      <div class="icon">
+        <img src="images/logo.png" alt="Energie icon" />
+      </div>
+      <div class="text">
+        <h2>Energie Transitie</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Energie Transitie</title>
+    <link rel="stylesheet" href="CSS/admindash.css">
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
+<header>
+    <div class="logo">
+      <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+      <span>Energie Transitie</span>
+    </div>
+    <nav>
+      <a href="login.php">Inloggen</a>
+      <a href="register.php">Registreren</a>
+    </nav>
+  </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Adres</th>
+                    <th>Gekoppelde mensen</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td></td><td></td><td></td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>
+                <tr><td></td><td></td><td></td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>
+                <tr><td></td><td></td><td></td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>
+                <tr><td></td><td></td><td></td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>
+                <tr><td></td><td></td><td></td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>
+                <tr><td></td><td></td><td></td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>
+            </tbody>
+        </table>
+    </main>
 </body>
 </html>

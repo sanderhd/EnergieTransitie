@@ -14,6 +14,8 @@ header {
   align-items: center;
   padding: 10px 30px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
 }
 
 .logo {
@@ -35,6 +37,7 @@ nav a {
   color: #2d7a5f;
   font-weight: 500;
   font-size: 20px;
+ display: inline-block;
 }
 
 main {
@@ -68,7 +71,31 @@ main {
   color: #333;
   font-size: 30px;
 }
+nav a:hover {
+  transition: color 0.3s ease, transform 0.3s ease;
+  animation: hoverEffect 1s infinite alternate, grow 0.3s forwards;
+}
 
+.info-box:hover {
+  animation: grow 0.3s forwards;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cdc9ae;
+  border-radius: 10px;
+}
 
 @keyframes fadein {
   from {
@@ -78,3 +105,30 @@ main {
     opacity: 1;
   }
 }
+
+@keyframes hoverEffect {
+  0% {
+    color: #2d7a5f; /* soft mint */
+    transform: scale(1);
+  }
+  50% {
+    color: #56c596; /* medium sea green */
+    transform: scale(1.1);
+  }
+  100% {
+    color: #379683; /* deep forest green */
+    transform: scale(1.2);
+  }
+}
+
+@keyframes grow {
+  from {
+    box-shadow: #000000 3px 3px 3px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+  }
+  to {
+    box-shadow: #333 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+  }
+}
+

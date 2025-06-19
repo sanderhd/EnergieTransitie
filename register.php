@@ -50,14 +50,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <header>
     <div class="logo">
-      <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
-      <span>Energie Transitie</span>
+        <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
     </div>
     <nav>
-      <a href="login.php">Inloggen</a>
-      <a href="register.php">Registreren</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="login.php">Inloggen</a>
+            <a href="register.php">Registreren</a>
+        <?php endif; ?>
     </nav>
-  </header>
+</header>
 
   <main>
     <div class="left">

@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 // Database verbinding importeren
 require_once 'db_conn.php';
 
@@ -21,15 +22,26 @@ $huizen = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle huizen in een array opslaan
 <body>
 <header>
     <div class="logo">
-      <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
-      <span>Energie Transitie</span>
+        <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
     </div>
-    <button id="create_huis" onclick="window.location.href='functions/create_huis.php'">nieuw huis</button>
     <nav>
-      <a href="login.php">Inloggen</a>
-      <a href="register.php">Registreren</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="login.php">Inloggen</a>
+            <a href="register.php">Registreren</a>
+        <?php endif; ?>
     </nav>
-  </header>
+</header>
 
     <main>
         <table>

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="register.php">Registreren</a>
     </nav>
   </header>
-
+<button class="theme-toggle" onclick="document.body.classList.toggle('dark')">🌙 Thema</button>
   <main>
     <div class="left">
       <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">

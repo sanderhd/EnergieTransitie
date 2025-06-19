@@ -93,39 +93,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Huis Aanmaken</title>
-
-<style>
-/* Stijl voor de suggestie-box onder de invoervelden */
-.suggest-box {
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    position: absolute;
-    background: white;
-    width: 200px;
-    z-index: 1000;
-}
-.suggest-box div {
-    padding: 5px;
-    cursor: pointer;
-}
-.suggest-box div:hover {
-    background-color: #eee;
-}
-.input-container {
-    position: relative;
-    margin-bottom: 1.5em;
-}
-</style>
-
+<link rel="stylesheet" href="../CSS/create_huis_style.css">
 </head>
 <body>
+    <header>
+    <div class="logo">
+      <a href="index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
+      <span>Energie Transitie</span>
+    </div>
+    <nav>
+      <a id="login-text" href="login.php">Inloggen</a>
+      <a id="register-text" href="register.php">Registreren</a>
+    </nav>
+  </header>
+  <button class="theme-toggle" onclick="document.body.classList.toggle('dark')">🌙 Thema</button>
 <!-- Link terug naar het dashboard -->
-<a href="../admin_dashboard.php">&larr; Terug</a>
-<h1>Nieuw Huis Aanmaken</h1>
+<a id="terug" href="../admin_dashboard.php">&larr; Terug</a>
 
+<main>
+    <section class="createform">
+            <h1>Nieuw Huis Aanmaken</h1>
 <!-- Formulier om een huis aan te maken -->
-<form action="create_huis.php" method="post" autocomplete="off">
+<form action="create_huis.php" method="post" autocomplete="off" class="styled-form">
     <div class="input-container">
         <label for="bewoner1">Bewoner 1 (gebruikersnaam):</label><br>
         <input type="text" id="bewoner1" name="bewoner1">
@@ -140,6 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <input type="submit" value="Maak Huis Aan">
 </form>
+</section>
+</main>
 
 <script>
 // Functie om autocomplete (suggesties) te tonen bij het typen

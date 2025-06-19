@@ -18,7 +18,7 @@
       <a href="register.php">Registreren</a>
     </nav>
   </header>
-      <div class="banner">
+  <button class="theme-toggle" onclick="document.body.classList.toggle('dark')">🌙 Thema</button>
    <main>
     <section class="info-box">
       <div class="icon">

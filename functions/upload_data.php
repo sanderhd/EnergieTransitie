@@ -98,14 +98,15 @@ if (isset($_POST["import"])) {
 <head>
     <meta charset="UTF-8">
     <title>CSV Uploaden - Huis <?php echo htmlspecialchars($huis_id); ?></title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <h2>CSV-bestand uploaden voor Huis <?php echo htmlspecialchars($huis_id); ?></h2>
+    <h1>CSV-bestand uploaden voor Huis <?php echo htmlspecialchars($huis_id); ?></h2>
     <p><strong>Let op:</strong> Het uploaden van een nieuw CSV-bestand zal alle bestaande data voor dit huis vervangen.</p>
     <form method="post" enctype="multipart/form-data">
         <label for="file">Kies CSV-bestand:</label>
         <input type="file" name="file" id="file" accept=".csv" required>
-        <p>Verwacht CSV-formaat met kolommen: Tijdstip, Zonnepaneelspanning_V, Zonnepaneelstroom_A, Waterstofproductie_Lu, Stroomverbruik_woning_kW, Waterstofverbruik_auto_Lu, Buitentemperatuur_C, Binnentemperatuur_C, Luchtdruk_hPa, Luchtvochtigheid_percent, Accuniveau_percent, CO2_concentratie_binnen_ppm, Waterstofopslag_woning_percent, Waterstofopslag_auto_percent</p>
+        <!-- <p>Verwacht CSV-formaat met kolommen: Tijdstip, Zonnepaneelspanning_V, Zonnepaneelstroom_A, Waterstofproductie_Lu, Stroomverbruik_woning_kW, Waterstofverbruik_auto_Lu, Buitentemperatuur_C, Binnentemperatuur_C, Luchtdruk_hPa, Luchtvochtigheid_percent, Accuniveau_percent, CO2_concentratie_binnen_ppm, Waterstofopslag_woning_percent, Waterstofopslag_auto_percent</p> -->
         <button type="submit" name="import">CSV Uploaden</button>
     </form>
 </body>

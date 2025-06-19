@@ -19,6 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['username'] = $user['username'];
     $_SESSION['role'] = $user['role'];
 
+    // Haal gekoppeld huis op
+    $stmtHuis = $conn->prepare("SELECT id FROM huizen WHERE bewoner1 = ? OR bewoner2 = ?");
+    $stmtHuis->execute([$user['id'], $user['id']]);
+    $huis = $stmtHuis->fetch(PDO::FETCH_ASSOC);
+
+    if ($huis) {
+      $_SESSION['huis_id'] = $huis['id'];
+    } else {
+      $_SESSION['huis_id'] = null;
+    }
+
     // Redirect op basis van rol
     if ($user['role'] === 'admin') {
       header("Location: admin_dashboard.php");

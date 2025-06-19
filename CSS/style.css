@@ -43,7 +43,7 @@ nav a {
 main {
   display: flex;
   justify-content: center;
-  margin-top: 230px;
+  margin-top: 100px;
 }
 
 .info-box {
@@ -108,15 +108,15 @@ nav a:hover {
 
 @keyframes hoverEffect {
   0% {
-    color: #2d7a5f; /* soft mint */
+    color: #2d7a5f; 
     transform: scale(1);
   }
   50% {
-    color: #56c596; /* medium sea green */
+    color: #56c596;
     transform: scale(1.1);
   }
   100% {
-    color: #379683; /* deep forest green */
+    color: #379683;
     transform: scale(1.2);
   }
 }

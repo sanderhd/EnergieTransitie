@@ -19,6 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['username'] = $user['username'];
     $_SESSION['role'] = $user['role'];
 
+    // Haal gekoppeld huis op
+    $stmtHuis = $conn->prepare("SELECT id FROM huizen WHERE bewoner1 = ? OR bewoner2 = ?");
+    $stmtHuis->execute([$user['id'], $user['id']]);
+    $huis = $stmtHuis->fetch(PDO::FETCH_ASSOC);
+
+    if ($huis) {
+      $_SESSION['huis_id'] = $huis['id'];
+    } else {
+      $_SESSION['huis_id'] = null;
+    }
+
     // Redirect op basis van rol
     if ($user['role'] === 'admin') {
       header("Location: admin_dashboard.php");
@@ -42,15 +53,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header>
-  <div class="logo">
-    <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
-    <span>Energie Transitie</span>
-  </div>
-  <nav>
-    <a href="login.php">Inloggen</a>
-    <a href="register.php">Registreren</a>
-  </nav>
-  </header>
+    <div class="logo">
+        <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
+    </div>
+    <nav>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="login.php">Inloggen</a>
+            <a href="register.php">Registreren</a>
+        <?php endif; ?>
+    </nav>
+</header>
 
   <main>
   <div class="left">

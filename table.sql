@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS huizen (
 ALTER TABLE users ADD COLUMN huis INT NULL;
 
 CREATE TABLE IF NOT EXISTS energietransitie_data (
+    huis_id INT NOT NULL,
     Tijdstip TIMESTAMP PRIMARY KEY,
     Zonnepaneelspanning_V FLOAT NOT NULL DEFAULT 0,
     Zonnepaneelstroom_A FLOAT NOT NULL DEFAULT 0,
@@ -35,4 +36,3 @@ CREATE TABLE IF NOT EXISTS energietransitie_data (
     Waterstofopslag_woning_percent FLOAT NOT NULL DEFAULT 0,
     Waterstofopslag_auto_percent FLOAT NOT NULL DEFAULT 0
 );
-

@@ -1,19 +1,25 @@
 <?php
-require_once '../db_conn.php'; // Zorg dat deze het $conn (of $pdo) object bevat
+require_once '../db_conn.php';
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$huis_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if ($huis_id <= 0) {
+    die('Geen geldig huis ID opgegeven in de URL.');
+}
 
 if (isset($_POST["import"])) {
     if (isset($_FILES["file"]) && $_FILES["file"]["size"] > 0) {
         $fileName = $_FILES["file"]["tmp_name"];
         $file = fopen($fileName, "r");
-        
-        // Verwijder eerst alle bestaande data
-        $conn->exec("TRUNCATE TABLE energietransitie_data");
-        
-        // Sla de header over (eerste regel)
+
+        $deleteStmt = $conn->prepare("DELETE FROM energietransitie_data WHERE huis_id = ?");
+        $deleteStmt->execute([$huis_id]);
+
         fgetcsv($file, 10000, ",");
 
         $sql = "INSERT INTO energietransitie_data (
+            huis_id,
             Tijdstip,
             Zonnepaneelspanning_V,
             Zonnepaneelstroom_A,
@@ -28,45 +34,61 @@ if (isset($_POST["import"])) {
             CO2_concentratie_binnen_ppm,
             Waterstofopslag_woning_percent,
             Waterstofopslag_auto_percent
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
         $rowCount = 0;
+        $errorCount = 0;
 
         while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-            // Sla over als de rij niet genoeg kolommen heeft
             if (count($column) < 14) {
+                $errorCount++;
                 continue;
             }
 
-            // Optioneel: zet encoding goed
             $column = array_map(function($value) {
                 return mb_convert_encoding(trim($value), 'UTF-8', 'auto');
             }, $column);
 
-            // Converteer datum formaat van M/D/YYYY H:MM naar YYYY-MM-DD HH:MM:SS
             $dateTime = DateTime::createFromFormat('n/j/Y G:i', $column[0]);
             if ($dateTime === false) {
+                $dateTime = DateTime::createFromFormat('m/d/Y H:i', $column[0]);
+                if ($dateTime === false) {
+                    $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $column[0]);
+                }
+            }
+
+            if ($dateTime === false) {
+                $errorCount++;
                 continue;
             }
+
             $formattedDateTime = $dateTime->format('Y-m-d H:i:s');
 
             try {
                 $stmt->execute([
+                    $huis_id,
                     $formattedDateTime, $column[1], $column[2], $column[3], $column[4],
                     $column[5], $column[6], $column[7], $column[8], $column[9],
                     $column[10], $column[11], $column[12], $column[13]
                 ]);
                 $rowCount++;
             } catch (PDOException $e) {
-                echo "Fout bij invoegen van rij: " . $e->getMessage();
-                exit;
+                $errorCount++;
+                error_log("CSV import fout: " . $e->getMessage());
             }
         }
         fclose($file);
-        echo "<div id='response' class='success'>CSV succesvol geïmporteerd! ($rowCount rijen toegevoegd)</div>";
+
+        $message = "CSV succesvol geïmporteerd voor huis ID $huis_id! ($rowCount rijen toegevoegd";
+        if ($errorCount > 0) {
+            $message .= ", $errorCount rijen overgeslagen wegens fouten";
+        }
+        $message .= ")";
+
+        echo $message;
     } else {
-        echo '<div id="response" class="error">Selecteer een geldig CSV-bestand.</div>';
+        echo 'Selecteer een geldig CSV-bestand.';
     }
 }
 ?>
@@ -75,20 +97,16 @@ if (isset($_POST["import"])) {
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>CSV Uploaden</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        .success { color: green; background: #e8f5e8; padding: 10px; margin: 10px 0; }
-        .error { color: red; background: #f5e8e8; padding: 10px; margin: 10px 0; }
-        form { margin-top: 20px; }
-    </style>
+    <title>CSV Uploaden - Huis <?php echo htmlspecialchars($huis_id); ?></title>
 </head>
 <body>
-    <h2>CSV-bestand uploaden</h2>
+    <h2>CSV-bestand uploaden voor Huis <?php echo htmlspecialchars($huis_id); ?></h2>
+    <p><strong>Let op:</strong> Het uploaden van een nieuw CSV-bestand zal alle bestaande data voor dit huis vervangen.</p>
     <form method="post" enctype="multipart/form-data">
         <label for="file">Kies CSV-bestand:</label>
         <input type="file" name="file" id="file" accept=".csv" required>
-        <button type="submit" name="import">Uploaden</button>
+        <p>Verwacht CSV-formaat met kolommen: Tijdstip, Zonnepaneelspanning_V, Zonnepaneelstroom_A, Waterstofproductie_Lu, Stroomverbruik_woning_kW, Waterstofverbruik_auto_Lu, Buitentemperatuur_C, Binnentemperatuur_C, Luchtdruk_hPa, Luchtvochtigheid_percent, Accuniveau_percent, CO2_concentratie_binnen_ppm, Waterstofopslag_woning_percent, Waterstofopslag_auto_percent</p>
+        <button type="submit" name="import">CSV Uploaden</button>
     </form>
 </body>
 </html>

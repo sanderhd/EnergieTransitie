@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  background-color: #fefeea;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ТЁМНАЯ ТЕМА */
+body.dark {
+  background-color: #1f2d26;
+  color: #f0f0e6;
+}
+
+body.dark .login-box,
+body.dark header {
+  background-color: #2c3e34;
+  color: #f0f0e6;
+}
+
+body.dark input,
+body.dark button {
+  background-color: #3a5146;
+  border-color: #5a7564;
+  color: #f0f0e6;
+}
+
+body.dark nav a {
+  color: #e0e0e0;
+}
+
+body.dark .forgot,
+body.dark #showPasswordLabel {
+  color: #d2e9da;
+}
+
+/* HEADER */
+header {
+  background-color: #fffddf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: #2d7a5f;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.logo img {
+  width: 90px;
+  height: 90px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a {
+  margin-right: 0;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #2d7a5f;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+/* ANIMATIONS */
+nav a:hover {
+  transition: color 0.3s ease, transform 0.3s ease;
+  animation: hoverEffect 1s infinite alternate, grow 0.3s forwards;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cdc9ae;
+  border-radius: 10px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hoverEffect {
+  0% {
+    color: #2d7a5f; /* soft mint */
+    transform: scale(1);
+  }
+  50% {
+    color: #56c596; /* medium sea green */
+    transform: scale(1.1);
+  }
+  100% {
+    color: #379683; /* deep forest green */
+    transform: scale(1.2);
+  }
+}
+@keyframes grow {
+  from {
+    box-shadow: #000000 3px 3px 3px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+  }
+  to {
+    box-shadow: #333 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+  }
+}
+
+/* MAIN */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.left img {
+  width: 500px;
+}
+
+.right {
+  margin-left: 50px;
+}
+
+/* LOGIN BOX */
+.login-box {
+  background-color: #fdfce9;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px #ccc;
+  width: 500px;
+  height: 500px;
+  transition: background-color 0.3s ease;
+}
+
+.login-box h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.login-box label {
+  display: block;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #d6e2c7;
+  border: 1px solid #a0bfa0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.login-box button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #d6e2c7;
+  border: 1px solid #7c9d7c;
+  border-radius: 30px;
+  font-size: 18px;
+  color: #2f6d4b;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #c6d9b7;
+}
+
+/* FORGOT PASSWORD */
+.forgot {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #2d6c47;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* SHOW PASSWORD CHECKBOX */
+
+#showPasswordLabel {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #2d6c47;
+  justify-content: flex-start;
+}
+#showPassword {
+  width: 16px;
+  height: 16px;
+}
+
+/* ERROR MESSAGE */
+.error {
+  color: red;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: #e4f1dc;
+  border: 1px solid #a0bfa0;
+  cursor: pointer;
+  color: #2d6c47;
+  font-weight: 500;
+  z-index: 999;
+  transition: all 0.3s ease;
+}

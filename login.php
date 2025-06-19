@@ -41,37 +41,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>
-<header>
-  <div class="logo">
-    <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
-    <span>Energie Transitie</span>
-  </div>
-  <nav>
-    <a href="login.php">Inloggen</a>
-    <a href="register.php">Registreren</a>
-  </nav>
+  <header>
+    <div class="logo">
+      <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+      <span>Energie Transitie</span>
+    </div>
+    <nav>
+      <button class="theme-toggle" onclick="document.body.classList.toggle('dark')">🌙 Thema</button>
+      <a href="login.php">Inloggen</a>
+      <a href="register.php">Registreren</a>
+    </nav>
   </header>
 
   <main>
-  <div class="left">
-    <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">
-  </div>
-  <div class="right">
-    <div class="login-box">
-    <h2>Inloggen</h2>
-    <?php if ($error): ?>
-      <div class="error" style="color:red;"><?php echo htmlspecialchars($error); ?></div>
-    <?php endif; ?>
-    <form method="post" action="">
-      <label for="username">Gebruikersnaam:</label>
-      <input type="text" id="username" name="username" required>
-      <label for="password">Wachtwoord:</label>
-      <input type="password" id="password" name="password" required>
-      <a href="register.php" class="forgot">Wachtwoord vergeten?</a>
-      <button type="submit">Inlog Knop</button>
-    </form>
+    <div class="left">
+      <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">
     </div>
-  </div>
+    <div class="right">
+      <div class="login-box">
+        <h2>Inloggen</h2>
+        <?php if ($error): ?>
+          <div class="error" style="color:red;">
+            <?php echo htmlspecialchars($error); ?>
+          </div>
+        <?php endif; ?>
+        <form method="post" action="" onsubmit="return validateForm()">
+          <label for="username">Gebruikersnaam:</label>
+          <input type="text" id="username" name="username" required>
+
+          <label for="password">Wachtwoord:</label>
+          <input type="password" id="password" name="password" required>
+
+          <div id="showPasswordLabel">
+              <input type="checkbox" id="showPassword">
+              <label for="showPassword">Wachtwoord tonen</label>
+          </div>
+
+
+          <a href="register.php" class="forgot">Wachtwoord vergeten?</a>
+
+          <button type="submit">Inlog Knop</button>
+        </form>
+      </div>
+    </div>
   </main>
+
+  <script>
+    document.getElementById('showPassword').addEventListener('change', function () {
+      const pw = document.getElementById('password');
+      pw.type = this.checked ? 'text' : 'password';
+    });
+
+    function validateForm() {
+      const user = document.getElementById('username').value.trim();
+      const pw = document.getElementById('password').value.trim();
+      if (user.length < 3) {
+        alert('Gebruikersnaam moet minstens 3 tekens bevatten.');
+        return false;
+      }
+      if (pw.length < 6) {
+        alert('Wachtwoord moet minstens 6 tekens bevatten.');
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>
+

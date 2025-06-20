@@ -1,6 +1,6 @@
 <div>
-  <h4>CO₂-concentratie binnen</h4>
-  <canvas id="co2Chart"></canvas>
+  <h4>Luchtvochtigheid</h4>
+  <canvas id="luchtvochtigheidChart"></canvas>
 </div>
 <script>
 fetch('/WidgetTest/data_get.php/energietransitie_data')
@@ -8,18 +8,18 @@ fetch('/WidgetTest/data_get.php/energietransitie_data')
   .then(data => {
     const recent = data.slice(0, 20).reverse();
     const labels = recent.map(row => row.Tijdstip);
-    const co2 = recent.map(row => row.CO2_concentratie_binnen_ppm);
+    const vochtigheid = recent.map(row => row.Luchtvochtigheid_percent);
 
-    const ctx = document.getElementById('co2Chart').getContext('2d');
+    const ctx = document.getElementById('luchtvochtigheidChart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
         labels,
         datasets: [{
-          label: 'CO₂ (ppm)',
-          data: co2,
-          borderColor: 'purple',
-          backgroundColor: 'rgba(128,0,128,0.1)',
+          label: 'Luchtvochtigheid (%)',
+          data: vochtigheid,
+          borderColor: 'rgb(102, 178, 255)',
+        //   backgroundColor: 'rgb(75, 192, 192)',
           tension: 0.3
         }]
       },
@@ -27,10 +27,10 @@ fetch('/WidgetTest/data_get.php/energietransitie_data')
         responsive: true,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'CO₂-concentratie binnen' }
+          title: { display: true, text: 'Luchtvochtigheid' }
         },
         scales: {
-          y: { title: { display: true, text: 'ppm' } }
+          y: { title: { display: true, text: '%' } }
         }
       }
     });

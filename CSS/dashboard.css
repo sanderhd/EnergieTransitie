@@ -109,6 +109,8 @@ nav a {
 
 /* Dashboard grid */
 #dashboard {
+  position: relative;
+  min-height: 600px;
   flex: 1;
   padding: 20px;
   background: #fdfde3;
@@ -121,7 +123,7 @@ nav a {
 
 /* Widget styles */
 .widget {
-  position: relative;
+  position: absolute;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 8px;

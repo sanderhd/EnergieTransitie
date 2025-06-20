@@ -235,6 +235,3 @@ document.addEventListener('DOMContentLoaded', () => {
     widget.classList.toggle('edit-mode', editMode);
   });
 });
-
-// Zorg ervoor dat de delete knop ook de staat opslaat
-// Dit is al aangepast in de loadWidget functie: onclick="this.parentElement.remove(); saveDashboardState();"

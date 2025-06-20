@@ -1,4 +1,5 @@
 <?php
+// Session starten voor de navbar
 session_start();
 ?>
 <!DOCTYPE html>
@@ -18,17 +19,17 @@ session_start();
         <span>Energie Transitie</span>
     </div>
     <nav>
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if (isset($_SESSION['user_id'])): ?> <!-- Session inkijken of er userid is -->
             <?php
-                $role = $_SESSION['role'];
-                if ($role === 'klant') {
+                $role = $_SESSION['role']; 
+                if ($role === 'klant') { // Als role === klant dan klant_dashboard als link doen
                     echo '<a href="klant_dashboard.php">Dashboard</a>';
-                } else {
+                } else { // anders admin dashboard
                     echo '<a href="admin_dashboard.php">Dashboard</a>';
                 }
             ?>
-            <a href="logout.php">Uitloggen</a>
-        <?php else: ?>
+            <a href="logout.php">Uitloggen</a> <!-- Uitloggen -->
+        <?php else: ?> 
             <a href="login.php">Inloggen</a>
             <a href="register.php">Registreren</a>
         <?php endif; ?>

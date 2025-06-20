@@ -4,28 +4,15 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// // Database configuration
-// $host = 'localhost';
-// $dbname = 'EnergieTransitie';
-// $username = 'root';
-// $password = '';
+// Database connectie
+require_once 'db_conn.php';
 
-// try {
-//     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// } catch (PDOException $e) {
-//     http_response_code(500);
-//     echo json_encode(['error' => 'Database connection failed']);
-//     exit;
-// }
-
-require_once 'db_conn.php'; 
-
-// Get the endpoint from URL
+// Endpoint uit de URL halen
 $request = $_SERVER['REQUEST_URI'];
 $path = parse_url($request, PHP_URL_PATH);
 $endpoint = basename($path);
 
+// Switch voor endpoints
 switch ($endpoint) {
     case 'users':
         getUsers($conn);

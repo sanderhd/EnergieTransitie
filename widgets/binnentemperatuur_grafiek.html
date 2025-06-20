@@ -3,7 +3,7 @@
   <canvas id="binnentempChart"></canvas>
 </div>
 <script>
-fetch('../data_get.php/energietransitie_data')
+fetch('/WidgetTest/data_get.php/energietransitie_data')
   .then(res => res.json())
   .then(data => {
     const recent = data.slice(0, 20).reverse();
@@ -18,8 +18,8 @@ fetch('../data_get.php/energietransitie_data')
         datasets: [{
           label: 'Binnentemperatuur (°C)',
           data: temp,
-          borderColor: 'red',
-          backgroundColor: 'rgba(255,0,0,0.1)',
+          borderColor: 'blue',
+          backgroundColor: 'rgba(0,0,255,0.1)',
           tension: 0.3
         }]
       },

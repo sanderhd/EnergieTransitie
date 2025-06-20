@@ -1,0 +1,120 @@
+<div>
+    <h4>Buitentemperatuur</h4>
+    <div class="buitentemp-display" style="font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+        <span class="buitentemp-value">Loading...</span>°C
+    </div>
+</div>
+<script>
+(function() {
+    'use strict';
+    
+    console.log('Buiten Temperatuur script starting...');
+    
+    function findBuitenTempElements() {
+        // Zoek elementen in de huidige context (ook in iframes)
+        const container = document.currentScript ? document.currentScript.closest('div') : document;
+        const display = container.querySelector ? container.querySelector('.buitentemp-display') : document.querySelector('.buitentemp-display');
+        const valueSpan = container.querySelector ? container.querySelector('.buitentemp-value') : document.querySelector('.buitentemp-value');
+        
+        console.log('Found display:', display);
+        console.log('Found value span:', valueSpan);
+        
+        return { display, valueSpan };
+    }
+    
+    function updateBuitenTempDisplay(tempValue, elements) {
+        if (!elements.valueSpan) {
+            console.error('Value element not found!');
+            return;
+        }
+        
+        // Round to 1 decimal place
+        const roundedTemp = Math.round(tempValue * 10) / 10;
+        elements.valueSpan.textContent = roundedTemp;
+        console.log('Updated buiten temperatuur to:', roundedTemp);
+        
+        // Color coding for outdoor temperature
+        if (elements.display) {
+            if (tempValue >= 15 && tempValue <= 25) {
+                elements.display.style.color = 'green'; // Pleasant weather
+            } else if (tempValue >= 5 && tempValue < 35) {
+                elements.display.style.color = 'orange'; // Acceptable weather
+            } else {
+                elements.display.style.color = 'red'; // Extreme weather
+            }
+        }
+    }
+    
+    function loadBuitenTempData() {
+        console.log('Loading buiten temperatuur data...');
+        
+        const elements = findBuitenTempElements();
+        if (!elements.valueSpan) {
+            console.log('Elements not ready yet, retrying in 500ms...');
+            setTimeout(loadBuitenTempData, 500);
+            return;
+        }
+        
+        elements.valueSpan.textContent = 'Loading...';
+        
+        fetch('/WidgetTest/data_get.php/energietransitie_data')
+            .then(response => {
+                console.log('API Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data received, length:', data.length);
+                
+                if (data && data.length > 0) {
+                    const latest = data[0];
+                    const tempValue = latest.Buitentemperatuur_C;
+                    console.log('Buiten temperatuur:', tempValue);
+                    
+                    updateBuitenTempDisplay(tempValue, elements);
+                } else {
+                    console.log('No data available');
+                    elements.valueSpan.textContent = 'No data';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading buiten temperatuur data:', error);
+                const elements = findBuitenTempElements();
+                if (elements.valueSpan) {
+                    elements.valueSpan.textContent = 'Error';
+                }
+                if (elements.display) {
+                    elements.display.style.color = 'red';
+                }
+            });
+    }
+    
+    // Meerdere manieren om te starten
+    function initWidget() {
+        console.log('Initializing buiten temperatuur widget...');
+        console.log('Document ready state:', document.readyState);
+        
+        // Direct proberen
+        loadBuitenTempData();
+        
+        // Na 1 seconde opnieuw proberen
+        setTimeout(loadBuitenTempData, 1000);
+        
+        // Na 3 seconden nog een keer
+        setTimeout(loadBuitenTempData, 3000);
+    }
+    
+    // Start op verschillende momenten
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWidget);
+    } else {
+        initWidget();
+    }
+    
+    // Extra fallback - start na script load
+    setTimeout(initWidget, 100);
+    
+})();
+</script>

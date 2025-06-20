@@ -45,12 +45,36 @@ session_start();
   </div>
 
   <div id="library">
-    <h3>Widgets</h3>
-    <div class="widget-item" draggable="true" data-widget="zonnepaneel">🔆 Zonnepaneel</div>
+    <h1>Widgets</h1>
+    
+
+    <h4>Stroom</h4>
     <div class="widget-item" draggable="true" data-widget="stroomverbruik">⚡ Stroomverbruik</div>
-    <div class="widget-item" draggable="true" data-widget="binnentemperatuur">🌡️ Binnentemperatuur</div>
-    <div class="widget-item" draggable="true" data-widget="buitentemperatuur">🔥 Buitentemperatuur</div>
+
+    <h4>Zonnepanelen</h4>
+    <div class="widget-item" draggable="true" data-widget="zonnepaneel">🔆 Zonnepaneel</div>
+    
+    <h4>Waterstof</h4>
+    <div class="widget-item" draggable="true" data-widget="waterstofopslag">🌦️ Waterstof Opslag</div>
+
+    <h4>Co2</h4>
     <div class="widget-item" draggable="true" data-widget="co2">🟣 CO₂-concentratie</div>
+
+    <h4>Lucht</h4>
+    <div class="widget-item" draggable="true" data-widget="luchtdruk">☁️ Luchtdruk</div>
+    <div class="widget-item" draggable="true" data-widget="luchtvochtigheid">💧 Luchtvochtigheid</div>
+
+    <h4>Temperaturen</h4>
+    <div class="widget-item" draggable="true" data-widget="binnentemperatuur_grafiek">🌡️ Binnentemperatuur Grafiek</div>
+    <div class="widget-item" draggable="true" data-widget="binnentemperatuur_laatste">🌡️ Huidige Binnentemperatuur</div>
+    <br>
+    <div class="widget-item" draggable="true" data-widget="buitentemperatuur_grafiek">❄️ Buitentemperatuur Grafiek</div>
+    <div class="widget-item" draggable="true" data-widget="buitentemperatuur_laatste">❄️ Huidige Buitentemperatuur</div>
+
+    <h4>Accu Niveau</h4>
+    <div class="widget-item" draggable="true" data-widget="accu_grafiek">🔋 Accu Niveau Grafiek</div>
+    <div class="widget-item" draggable="true" data-widget="accu_procent">🔋 Accu Laatste</div>
+    <div class="widget-item" draggable="true" data-widget="accu_circle">🔋 Accu Cirkel</div>
   </div>
 
   <script src="JS/main.js"></script>

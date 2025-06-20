@@ -1,0 +1,65 @@
+<div>
+  <h4>Waterstof Opslag</h4>
+  <canvas id="waterstofOpslagChart"></canvas>
+</div>
+<script>
+fetch('/WidgetTest/data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    // Neem de laatste 20 metingen (of minder)
+    const recent = data.slice(0, 20).reverse();
+    const labels = recent.map(row => row.Tijdstip);
+    const woning = recent.map(row => row.Waterstofopslag_woning_percent);
+    const auto = recent.map(row => row.Waterstofopslag_auto_percent);
+
+    const ctx = document.getElementById('waterstofOpslagChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Woning (%)',
+            data: woning,
+            borderColor: 'rgb(102, 178, 255)',
+            // backgroundColor: 'rgba(255,165,0,0.1)',
+            yAxisID: 'y',
+            tension: 0.3
+          },
+          {
+            label: 'Auto (%)',
+            data: auto,
+            borderColor: 'rgb(255, 102, 102)',
+            // backgroundColor: 'rgba(0,0,255,0.1)',
+            yAxisID: 'y1',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        stacked: false,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Waterstof Opslag Auto & Huis' }
+        },
+        scales: {
+          y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            title: { display: true, text: 'Woning (%)' }
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            title: { display: true, text: 'Auto (%)' },
+            grid: { drawOnChartArea: false }
+          }
+        }
+      }
+    });
+  });
+</script>

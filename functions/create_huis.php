@@ -113,14 +113,26 @@ HTML;
 <body>
     <header>
     <div class="logo">
-      <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
-      <span>Energie Transitie</span>
+        <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
     </div>
     <nav>
-      <a id="login-text" href="../login.php">Inloggen</a>
-      <a id="register-text" href="../register.php">Registreren</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="../klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="../admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="login.php">Inloggen</a>
+            <a href="register.php">Registreren</a>
+        <?php endif; ?>
     </nav>
-  </header>
+</header>
 
 <?php if (isset($successMessage)) echo $successMessage; ?>
 <?php if (isset($errorMessage)) echo $errorMessage; ?>

@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fefeea;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #e4f3ec;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d7a5f;
+}
+
+.logo img {
+    height: 40px;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #2d7a5f;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #379683;
+}
+
+main {
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px;
+    height: auto;
+    max-width: 800px;
+    margin: auto;
+    border: #333 solid 2px;
+    border-radius: 5px;
+    box-shadow: #333 0px 0px 20px;
+}
+
+.success-message {
+    position: sticky;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.success-message h2 {
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.success-message p {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.success-message .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #2d7a5f;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.success-message .button:hover {
+    background-color: #236b4f;
+    background: #fefeea;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: #3d3d38 0px 0px 20px;
+    animation: fadein 0.8s ease-in;
+    border: #3d3d38 solid 2px;
+    animation: fadeinSlow 2s ease-in;
+}
+
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+
+    text-align: center;
+    color: #2d7a5f;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2d7a5f;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    background-color: #2d7a5f;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #379683;
+}
+
+.suggest-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 999;
+    width: 810px;
+}
+
+.suggest-box div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggest-box div:hover {
+    background-color: #f2f2f2;
+}
+
+#terug-button {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    color: #2d7a5f;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    animation: slidein 1s ease-in;
+}
+.success-box, .error-box {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 500px;
+    text-align: center;
+    animation: slideFade 0.6s ease-out;
+}
+
+.success-box {
+    background-color: #e6f9ed;
+    border: 2px solid #2d7a5f;
+    color: #2d7a5f;
+}
+
+.error-box {
+    background-color: #ffeaea;
+    border: 2px solid #d33;
+    color: #a70000;
+}
+
+.success-icon, .error-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.button-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2d7a5f;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #379683;
+}
+
+@keyframes slideFade {
+    0% { opacity: 0; transform: translate(-50%, -30px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes slideFadeError {
+    0% { opacity: 0; transform: translate(-50%, -30px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes popin {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeinSlow  {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideFade {
+    0% { opacity: 0; transform: translate(-50%, -30px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}

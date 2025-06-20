@@ -1,0 +1,38 @@
+<div>
+  <h4>Binnentemperatuur</h4>
+  <canvas id="binnentempChart"></canvas>
+</div>
+<script>
+fetch('../data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    const recent = data.slice(0, 20).reverse();
+    const labels = recent.map(row => row.Tijdstip);
+    const temp = recent.map(row => row.Binnentemperatuur_C);
+
+    const ctx = document.getElementById('binnentempChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Binnentemperatuur (°C)',
+          data: temp,
+          borderColor: 'red',
+          backgroundColor: 'rgba(255,0,0,0.1)',
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Binnentemperatuur' }
+        },
+        scales: {
+          y: { title: { display: true, text: '°C' } }
+        }
+      }
+    });
+  });
+</script>

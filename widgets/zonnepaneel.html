@@ -1,0 +1,65 @@
+<div>
+  <h4>Zonnepaneel Data</h4>
+  <canvas id="zonnepaneelChart"></canvas>
+</div>
+<script>
+fetch('/WidgetTest/data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    // Neem de laatste 20 metingen (of minder)
+    const recent = data.slice(0, 20).reverse();
+    const labels = recent.map(row => row.Tijdstip);
+    const spanning = recent.map(row => row.Zonnepaneelspanning_V);
+    const stroom = recent.map(row => row.Zonnepaneelstroom_A);
+
+    const ctx = document.getElementById('zonnepaneelChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Spanning (V)',
+            data: spanning,
+            borderColor: 'orange',
+            backgroundColor: 'rgba(255,165,0,0.1)',
+            yAxisID: 'y',
+            tension: 0.3
+          },
+          {
+            label: 'Stroom (A)',
+            data: stroom,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0,0,255,0.1)',
+            yAxisID: 'y1',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        stacked: false,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Zonnepaneel Spanning & Stroom' }
+        },
+        scales: {
+          y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            title: { display: true, text: 'Spanning (V)' }
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            title: { display: true, text: 'Stroom (A)' },
+            grid: { drawOnChartArea: false }
+          }
+        }
+      }
+    });
+  });
+</script>

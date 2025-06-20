@@ -1,75 +1,65 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Widget Dashboard</title>
+  <link rel="stylesheet" href="CSS/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 </head>
 <body>
-<<<<<<< Updated upstream
-    <h1>Klant Dashboard</h1>
-=======
-<header>
+  <header>
     <div class="logo">
       <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
       <span>Energie Transitie</span>
     </div>
     <nav>
-      <a href="login.php">Inloggen</a>
-      <a href="register.php">Registreren</a>
+      <?php if (isset($_SESSION['user_id'])): ?>
+        <?php
+          $role = $_SESSION['role'];
+          if ($role === 'klant') {
+            echo '<a href="klant_dashboard.php">Dashboard</a>';
+          } else {
+            echo '<a href="admin_dashboard.php">Dashboard</a>';
+          }
+        ?>
+        <a href="logout.php">Uitloggen</a>
+      <?php else: ?>
+        <a href="login.php">Inloggen</a>
+        <a href="register.php">Registreren</a>
+      <?php endif; ?>
     </nav>
   </header>
-<button class="theme-toggle" onclick="document.body.classList.toggle('dark')">🌙 Thema</button>
-  <main>
-    <section class="top-panels">
-      <div class="panel terug">
-        <div class="value">4.31 kWh</div>
-        <div class="label">Terug geleverd</div>
-      </div>
-      <div class="panel zon">
-        <div class="value">36.469 %</div>
-        <div class="label">Zelf opgewekte zonnen energie</div>
-      </div>
-      <div class="panel niet-fossiel">
-        <div class="value">70.79 %</div>
-        <div class="label">Niet-fossiele energie verbruikt</div>
-      </div>
-      <div class="panel tijdsverbruik">
-        <div>
-          <strong>Week</strong><br/><span>0 kWh</span>
-        </div>
-        <div class="divider"></div>
-        <div>
-          <strong>Maand</strong><br/><span>0.8 kWh</span>
-        </div>
-      </div>
-    </section>
 
-    <section class="middle">
-      <div class="graph">
-        <h2>Energie Verbruik</h2>
-        <img src="graph-placeholder.png" alt="Graph" />
-      </div>
-      <div class="right-panels">
-        <div class="storage">
-          <h3>Opslag</h3>
-          <p>Gas - xx<br/>Stroom - xx</p>
-        </div>
-        <div class="kosten">
-          <h3>Totale Kosten</h3>
-          <p>Gas - $$<br/>Stroom - $$</p>
-        </div>
-      </div>
-    </section>
-  </main>
->>>>>>> Stashed changes
+  <div id="dashboard-container">
+    <div id="toolbar">
+      <label>
+        <input type="checkbox" id="editToggle"> Edit Mode
+      </label>
+    </div>
+    <div id="dashboard"></div>
+  </div>
+
+  <div id="library">
+    <h3>Widgets</h3>
+    <div class="widget-item" draggable="true" data-widget="zonnepaneel">🔆 Zonnepaneel</div>
+    <div class="widget-item" draggable="true" data-widget="stroomverbruik">⚡ Stroomverbruik</div>
+    <div class="widget-item" draggable="true" data-widget="binnentemperatuur">🌡️ Binnentemperatuur</div>
+    <div class="widget-item" draggable="true" data-widget="buitentemperatuur">🔥 Buitentemperatuur</div>
+    <div class="widget-item" draggable="true" data-widget="co2">🟣 CO₂-concentratie</div>
+  </div>
+
+  <script src="JS/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const editToggle = document.getElementById('editToggle');
+      editToggle.addEventListener('change', toggleEditMode);
+    });
+    fetch('data_get.php/energietransitie_data')
+  </script>
 </body>
 </html>

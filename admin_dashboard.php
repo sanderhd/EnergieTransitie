@@ -44,6 +44,9 @@ $huizen = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle huizen in een array opslaan
 </header>
 
     <main>
+        <button>
+            <a href="functions/create_huis.php">Nieuw Huis Toevoegen</a>
+        </button>
         <table>
             <thead>
                 <tr>

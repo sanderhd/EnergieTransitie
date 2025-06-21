@@ -3,7 +3,7 @@
   <canvas id="accuChart"></canvas>
 </div>
 <script>
-fetch('/WidgetTest/data_get.php/energietransitie_data')
+fetch('data_get.php/energietransitie_data')
   .then(res => res.json())
   .then(data => {
     if (data && data.length > 0) {

@@ -3,7 +3,7 @@
   <canvas id="buitentempChart"></canvas>
 </div>
 <script>
-fetch('/WidgetTest/data_get.php/energietransitie_data')
+fetch('data_get.php/energietransitie_data')
   .then(res => res.json())
   .then(data => {
     const recent = data.slice(0, 20).reverse();

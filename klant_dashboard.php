@@ -46,6 +46,8 @@ session_start();
 
   <div id="library">
     <h1>Widgets</h1>
+
+    <input type="text" id="searchInput" placeholder="Zoeken...">
     
 
     <h4>Stroom</h4>
@@ -53,9 +55,13 @@ session_start();
 
     <h4>Zonnepanelen</h4>
     <div class="widget-item" draggable="true" data-widget="zonnepaneel">🔆 Zonnepaneel</div>
+    <div class="widget-item" draggable="true" data-widget="zonnepaneel_spanning">📈 Zonnepaneel Spanning</div>
+    <div class="widget-item" draggable="true" data-widget="zonnepaneel_stroom">⚡ Zonnepaneel Stroom</div>
     
     <h4>Waterstof</h4>
     <div class="widget-item" draggable="true" data-widget="waterstofopslag">🌦️ Waterstof Opslag</div>
+    <div class="widget-item" draggable="true" data-widget="waterstof_auto">🚗 Waterstof Opslag Auto</div>
+    <div class="widget-item" draggable="true" data-widget="waterstof_woning">🏠 Waterstof Opslag Woning</div>
 
     <h4>Co2</h4>
     <div class="widget-item" draggable="true" data-widget="co2">🟣 CO₂-concentratie</div>
@@ -84,6 +90,35 @@ session_start();
       editToggle.addEventListener('change', toggleEditMode);
     });
     fetch('data_get.php/energietransitie_data')
+  </script>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('input', function() {
+      const filter = this.value.toLowerCase();
+      const widgetItems = document.querySelectorAll('.widget-item');
+      const widgetHeaders = document.querySelectorAll('#library h4');
+
+      widgetItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(filter)) {
+          item.style.display = '';
+          widgetHeaders.forEach(header => {
+            if (header.nextElementSibling === item) {
+              header.style.display = '';
+            }
+          });
+        } else {
+          item.style.display = 'none';
+          widgetHeaders.forEach(header => {
+            if (header.nextElementSibling === item) {
+              header.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>

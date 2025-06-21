@@ -57,7 +57,7 @@
         
         elements.valueSpan.textContent = 'Loading...';
         
-        fetch('/WidgetTest/data_get.php/energietransitie_data')
+        fetch('data_get.php/energietransitie_data')
             .then(response => {
                 console.log('API Response status:', response.status);
                 if (!response.ok) {

@@ -1,6 +1,6 @@
 <div>
-  <h4>Luchtdruk</h4>
-  <canvas id="luchtdrukChart"></canvas>
+  <h4>Waterstof Opslag Auto</h4>
+  <canvas id="waterstofOpslagWoning"></canvas>
 </div>
 <script>
 fetch('data_get.php/energietransitie_data')
@@ -8,16 +8,16 @@ fetch('data_get.php/energietransitie_data')
   .then(data => {
     const recent = data.slice(0, 20).reverse();
     const labels = recent.map(row => row.Tijdstip);
-    const luchtdruk = recent.map(row => row.Luchtdruk_hPa);
+    const waterstofwoning = recent.map(row => row.Waterstofopslag_woning_percent);
 
-    const ctx = document.getElementById('luchtdrukChart').getContext('2d');
+    const ctx = document.getElementById('waterstofOpslagWoning').getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
         labels,
         datasets: [{
-          label: 'Luchtdruk (hPa)',
-          data: luchtdruk,
+          label: 'Woning (%)',
+          data: waterstofwoning,
           borderColor: 'rgb(102, 178, 255)',
         //   backgroundColor: 'rgb(75, 192, 192)',
           tension: 0.3
@@ -27,10 +27,10 @@ fetch('data_get.php/energietransitie_data')
         responsive: true,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'Luchtdruk' }
+          title: { display: true, text: 'Waterstof Opslag Woning' }
         },
         scales: {
-          y: { title: { display: true, text: 'hPa' } }
+          y: { title: { display: true, text: '%' } }
         }
       }
     });

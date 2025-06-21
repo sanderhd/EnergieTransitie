@@ -1,14 +1,14 @@
 <div>
     <h4>Accu Niveau</h4>
     <div class="accu-display" style="font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
-        <span class="accu-value">Loading...</span>%
+        <span class="accu-value">Laden...</span>%
     </div>
 </div>
 <script>
 (function() {
     'use strict';
     
-    console.log('Accu widget script starting...');
+    console.log('Accu widget script starten...');
     
     function findAccuElements() {
         // Zoek elementen in de huidige context (ook in iframes)
@@ -55,7 +55,7 @@
         
         elements.valueSpan.textContent = 'Loading...';
         
-        fetch('/WidgetTest/data_get.php/energietransitie_data')
+        fetch('data_get.php/energietransitie_data')
             .then(response => {
                 console.log('API Response status:', response.status);
                 if (!response.ok) {

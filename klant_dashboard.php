@@ -6,7 +6,8 @@ session_start();
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Widget Dashboard</title>
+  <title>Energie Transitie</title>
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="CSS/dashboard.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
@@ -38,7 +39,7 @@ session_start();
   <div id="dashboard-container">
     <div id="toolbar">
       <label>
-        <input type="checkbox" id="editToggle"> Edit Mode
+        <input type="checkbox" id="editToggle" class="editBox"> Edit Mode
       </label>
     </div>
     <div id="dashboard"></div>
@@ -47,7 +48,7 @@ session_start();
   <div id="library">
     <h1>Widgets</h1>
 
-    <input type="text" id="searchInput" placeholder="Zoeken...">
+    <input type="text" class="search" id="searchInput" placeholder="Zoeken...">
     
 
     <h4>Stroom</h4>

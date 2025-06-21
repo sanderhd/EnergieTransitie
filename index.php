@@ -44,7 +44,7 @@ session_start();
       </div>
       <div class="text">
         <h2>Energie Transitie</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+        <p>Met ons energie-dashboard krijg je realtime inzicht in jouw verbruik, opwekking en besparing. Zo zet je eenvoudig stappen richting een duurzamere toekomst.</p>
       </div>
     </section>
   </main>

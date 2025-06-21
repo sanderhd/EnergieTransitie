@@ -122,10 +122,10 @@ nav a {
 /* Widget styles */
 .widget {
   position: relative;
-  border: 1px solid #ccc;
+  border: 1px solid #2d7a5f;
   padding: 10px;
   border-radius: 8px;
-  background: #f9f9f9;
+  background: #fffddf;
   min-height: 200px;
   width: 100%;
   margin: 0;
@@ -229,65 +229,130 @@ nav a:hover {
   animation: hoverEffect 1s infinite alternate, grow 0.3s forwards;
 }
 
-/* Chart.js Widget Styles */
-.widget canvas {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 180px;
-  border-radius: 6px;
-}
-
-.chart-container {
-  position: relative;
+.search {
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
   width: 100%;
-  height: calc(100% - 30px);
-  padding: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  outline: none;
+  background-color: #fdfde3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #0d0c22;
+  border: none;
+  transition: .3s ease;
 }
 
-.chart-title {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #2d7a5f;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 2px 8px;
-  border-radius: 4px;
-  z-index: 10;
+.search:focus {
+  box-shadow: 0 0 5px #2d7a5f;
 }
 
-.chart-legend {
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-size: 12px;
-  padding: 0 10px;
-}
-
-.chart-legend-item {
+label {
   display: flex;
   align-items: center;
-  margin: 2px 5px;
+  gap: 8px;
 }
 
-.chart-legend-color {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  margin-right: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.editBox {
+  --primary-color: #2d7a5f;
+  --secondary-color: #fff;
+  --primary-hover-color: #5dcfa7;
+  /* checkbox */
+  --checkbox-diameter: 20px;
+  --checkbox-border-radius: 5px;
+  --checkbox-border-color: #d9d9d9;
+  --checkbox-border-width: 1px;
+  --checkbox-border-style: solid;
+  /* checkmark */
+  --checkmark-size: 1.2;
 }
 
-/* Color scheme for charts */
-:root {
-  --chart-color-1: #2d7a5f;
-  --chart-color-2: #56c596;
-  --chart-color-3: #379683;
-  --chart-color-4: #ffbe0b;
-  --chart-color-5: #fb5607;
+.editBox, 
+.editBox *, 
+.editBox *::before, 
+.editBox *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.editBox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: var(--checkbox-diameter);
+  height: var(--checkbox-diameter);
+  border-radius: var(--checkbox-border-radius);
+  background: var(--secondary-color);
+  border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.editBox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  border-radius: inherit;
+  opacity: 0;
+  -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.editBox::before {
+  top: 40%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  opacity: 0;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+}
+
+/* actions */
+
+.editBox:hover {
+  border-color: var(--primary-color);
+}
+
+.editBox:checked {
+  background: var(--primary-color);
+  border-color: transparent;
+}
+
+.editBox:checked::before {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+
+.editBox:active:not(:checked)::after {
+  -webkit-transition: none;
+  -o-transition: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  opacity: 1;
 }

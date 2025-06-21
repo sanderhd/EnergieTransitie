@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Energie Transitie - Inloggen</title>
+  <title>Energie Transitie</title>
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>

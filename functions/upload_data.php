@@ -1,5 +1,6 @@
 <?php
 require_once '../db_conn.php';
+session_start();
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $huis_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -94,20 +95,47 @@ if (isset($_POST["import"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CSV Uploaden - Huis <?php echo htmlspecialchars($huis_id); ?></title>
+    <title>Energie Transitie - Huis <?php echo htmlspecialchars($huis_id); ?></title>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/createhuis.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <h1>CSV-bestand uploaden voor Huis <?php echo htmlspecialchars($huis_id); ?></h2>
-    <p><strong>Let op:</strong> Het uploaden van een nieuw CSV-bestand zal alle bestaande data voor dit huis vervangen.</p>
-    <form method="post" enctype="multipart/form-data">
-        <label for="file">Kies CSV-bestand:</label>
-        <input type="file" name="file" id="file" accept=".csv" required>
-        <!-- <p>Verwacht CSV-formaat met kolommen: Tijdstip, Zonnepaneelspanning_V, Zonnepaneelstroom_A, Waterstofproductie_Lu, Stroomverbruik_woning_kW, Waterstofverbruik_auto_Lu, Buitentemperatuur_C, Binnentemperatuur_C, Luchtdruk_hPa, Luchtvochtigheid_percent, Accuniveau_percent, CO2_concentratie_binnen_ppm, Waterstofopslag_woning_percent, Waterstofopslag_auto_percent</p> -->
-        <button type="submit" name="import">CSV Uploaden</button>
-    </form>
+<header>
+    <div class="logo">
+        <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
+    </div>
+    <nav>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="../klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="../admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="../logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="../login.php">Inloggen</a>
+            <a href="../register.php">Registreren</a>
+        <?php endif; ?>
+    </nav>
+</header>
+
+    <main>
+        <h1>CSV-bestand uploaden voor Huis <?php echo htmlspecialchars($huis_id); ?></h2>
+        <p><strong>Let op:</strong> Het uploaden van een nieuw CSV-bestand zal alle bestaande data voor dit huis vervangen.</p>
+        <form method="post" enctype="multipart/form-data">
+            <label for="file">Kies CSV-bestand:</label>
+            <input type="file" name="file" id="file" accept=".csv" required>
+            <button type="submit" name="import">CSV Uploaden</button>
+        </form>
+    </main>
+    
 </body>
 </html>

@@ -59,7 +59,22 @@ thead {
 }
 
 a {
-    color: #3d8251;
     text-decoration: none;
-    font-size: 14px;
+    color: #4d6b3c;
+}
+
+button {
+    background-color: #e6efc2;
+    color: #4d6b3c;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #cbd3aa;
 }

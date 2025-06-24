@@ -19,6 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['username'] = $user['username'];
     $_SESSION['role'] = $user['role'];
 
+    // Haal gekoppeld huis op
+    $stmtHuis = $conn->prepare("SELECT id FROM huizen WHERE bewoner1 = ? OR bewoner2 = ?");
+    $stmtHuis->execute([$user['id'], $user['id']]);
+    $huis = $stmtHuis->fetch(PDO::FETCH_ASSOC);
+
+    if ($huis) {
+      $_SESSION['huis_id'] = $huis['id'];
+    } else {
+      $_SESSION['huis_id'] = null;
+    }
+
     // Redirect op basis van rol
     if ($user['role'] === 'admin') {
       header("Location: admin_dashboard.php");
@@ -37,25 +48,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Energie Transitie - Inloggen</title>
+  <title>Energie Transitie</title>
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>
 <header>
-  <div class="logo">
-    <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
-    <span>Energie Transitie</span>
-  </div>
-  <nav>
-    <a href="login.php">Inloggen</a>
-    <a href="register.php">Registreren</a>
-  </nav>
-  </header>
+    <div class="logo">
+        <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
+    </div>
+    <nav>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="login.php">Inloggen</a>
+            <a href="register.php">Registreren</a>
+        <?php endif; ?>
+    </nav>
+</header>
 
   <main>
-  <div class="left">
-    <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">
-  </div>
+  
+    
   <div class="right">
     <div class="login-box">
     <h2>Inloggen</h2>
@@ -68,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label for="password">Wachtwoord:</label>
       <input type="password" id="password" name="password" required>
       <a href="register.php" class="forgot">Wachtwoord vergeten?</a>
-      <button type="submit">Inlog Knop</button>
+      <button type="submit">Inloggen</button>
     </form>
     </div>
   </div>

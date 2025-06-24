@@ -1,0 +1,38 @@
+<div>
+  <h4>Stroomverbruik woning</h4>
+  <canvas id="stroomverbruikChart"></canvas>
+</div>
+<script>
+fetch('data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    const recent = data.slice(0, 20).reverse();
+    const labels = recent.map(row => row.Tijdstip);
+    const verbruik = recent.map(row => row.Stroomverbruik_woning_kW);
+
+    const ctx = document.getElementById('stroomverbruikChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Stroomverbruik (kW)',
+          data: verbruik,
+          borderColor: 'green',
+          backgroundColor: 'rgba(0,128,0,0.1)',
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Stroomverbruik woning' }
+        },
+        scales: {
+          y: { title: { display: true, text: 'kW' } }
+        }
+      }
+    });
+  });
+</script>

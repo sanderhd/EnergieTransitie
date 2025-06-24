@@ -1,0 +1,118 @@
+<div>
+    <h4>Accu Niveau</h4>
+    <div class="accu-display" style="font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+        <span class="accu-value">Laden...</span>%
+    </div>
+</div>
+<script>
+(function() {
+    'use strict';
+    
+    console.log('Accu widget script starten...');
+    
+    function findAccuElements() {
+        // Zoek elementen in de huidige context (ook in iframes)
+        const container = document.currentScript ? document.currentScript.closest('div') : document;
+        const display = container.querySelector ? container.querySelector('.accu-display') : document.querySelector('.accu-display');
+        const valueSpan = container.querySelector ? container.querySelector('.accu-value') : document.querySelector('.accu-value');
+        
+        console.log('Found display:', display);
+        console.log('Found value span:', valueSpan);
+        
+        return { display, valueSpan };
+    }
+    
+    function updateAccuDisplay(accuValue, elements) {
+        if (!elements.valueSpan) {
+            console.error('Value element not found!');
+            return;
+        }
+        
+        elements.valueSpan.textContent = accuValue;
+        console.log('Updated accu value to:', accuValue);
+        
+        // Color coding
+        if (elements.display) {
+            if (accuValue > 60) {
+                elements.display.style.color = 'green';
+            } else if (accuValue > 30) {
+                elements.display.style.color = 'orange';
+            } else {
+                elements.display.style.color = 'red';
+            }
+        }
+    }
+    
+    function loadAccuData() {
+        console.log('Loading accu data...');
+        
+        const elements = findAccuElements();
+        if (!elements.valueSpan) {
+            console.log('Elements not ready yet, retrying in 500ms...');
+            setTimeout(loadAccuData, 500);
+            return;
+        }
+        
+        elements.valueSpan.textContent = 'Loading...';
+        
+        fetch('data_get.php/energietransitie_data')
+            .then(response => {
+                console.log('API Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data received, length:', data.length);
+                
+                if (data && data.length > 0) {
+                    const latest = data[0];
+                    const accuValue = latest.Accuniveau_percent;
+                    console.log('Accu percentage:', accuValue);
+                    
+                    updateAccuDisplay(accuValue, elements);
+                } else {
+                    console.log('No data available');
+                    elements.valueSpan.textContent = 'No data';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading accu data:', error);
+                const elements = findAccuElements();
+                if (elements.valueSpan) {
+                    elements.valueSpan.textContent = 'Error';
+                }
+                if (elements.display) {
+                    elements.display.style.color = 'red';
+                }
+            });
+    }
+    
+    // Meerdere manieren om te starten
+    function initWidget() {
+        console.log('Initializing accu widget...');
+        console.log('Document ready state:', document.readyState);
+        
+        // Direct proberen
+        loadAccuData();
+        
+        // Na 1 seconde opnieuw proberen
+        setTimeout(loadAccuData, 1000);
+        
+        // Na 3 seconden nog een keer
+        setTimeout(loadAccuData, 3000);
+    }
+    
+    // Start op verschillende momenten
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWidget);
+    } else {
+        initWidget();
+    }
+    
+    // Extra fallback - start na script load
+    setTimeout(initWidget, 100);
+    
+})();
+</script>

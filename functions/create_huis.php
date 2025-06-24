@@ -103,24 +103,34 @@ HTML;
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Huis Aanmaken</title>
+<title>Energie Transitie | Huis Aanmaken</title>
+<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="../CSS/createhuis.css"/>
-<link rel="stylesheet" href="../CSS/style.css" />
-<style>
-
-</style>
+<link rel="stylesheet" href="../CSS/style.css"/>
 </head>
 <body>
     <header>
     <div class="logo">
-      <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
-      <span>Energie Transitie</span>
+        <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
     </div>
     <nav>
-      <a id="login-text" href="../login.php">Inloggen</a>
-      <a id="register-text" href="../register.php">Registreren</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="../klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="../admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="../logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="../login.php">Inloggen</a>
+            <a href="../register.php">Registreren</a>
+        <?php endif; ?>
     </nav>
-  </header>
+</header>
 
 <?php if (isset($successMessage)) echo $successMessage; ?>
 <?php if (isset($errorMessage)) echo $errorMessage; ?>

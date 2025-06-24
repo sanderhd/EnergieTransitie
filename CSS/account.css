@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #fdfde3;
+  animation: fadein 1s ease-in-out;
+}
+
+header {
+  background-color: #fffddf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: #2d7a5f;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.logo img {
+  width: 90px;
+  height: 90px;
+}
+
+nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #2d7a5f;
+  font-weight: 500;
+  font-size: 20px;
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+  animation: hoverEffect 1s infinite alternate;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.info-box {
+  width: 1000px;
+  background-color: #f9f3cf;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 30px;
+}
+
+.icon img {
+  width: 300px;
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+.form-box {
+  flex: 1;
+}
+
+.form-box h2 {
+  color: #2d7a5f;
+  font-size: 40px;
+  margin-top: 0;
+  background: linear-gradient(90deg, #004225, #3E8E41, #2E7D5B, #1E4D3A);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.form-box p {
+  font-size: 20px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 500;
+  color: #2d7a5f;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="username"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #2d7a5f;
+  outline: none;
+}
+
+button {
+  padding: 12px;
+  background-color: #2d7a5f;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #379683;
+}
+
+a[href*="delete_account"] {
+  display: inline-block;
+  margin-top: 15px;
+  color: red;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hoverEffect {
+  0%   { color: #2d7a5f; transform: scale(1); }
+  50%  { color: #56c596; transform: scale(1.1); }
+  100% { color: #379683; transform: scale(1.2); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cdc9ae;
+  border-radius: 10px;
+}

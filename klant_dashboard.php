@@ -18,6 +18,10 @@ session_start();
       <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
       <span>Energie Transitie</span>
     </div>
+    <div class="account-info">
+      <a href="account.php">👤</a>  
+     
+    </div>
     <nav>
       <?php if (isset($_SESSION['user_id'])): ?>
         <?php
@@ -42,9 +46,7 @@ session_start();
         <input type="checkbox" id="editToggle" class="editBox"> Edit Mode
       </label>
 
-      <div>
-        <a href="functions/delete_account.php?id=<?php echo $_SESSION['user_id']; ?>" onclick="return confirm('Weet je zeker dat je je account wilt verwijderen?')">Delete</a>
-      </div>
+    
     </div>
     <div id="dashboard"></div>
   </div>

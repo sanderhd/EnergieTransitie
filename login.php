@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Energie Transitie - Inloggen</title>
+  <title>Energie Transitie</title>
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>
@@ -76,9 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </header>
 
   <main>
-  <div class="left">
-    <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">
-  </div>
+  
+    
   <div class="right">
     <div class="login-box">
     <h2>Inloggen</h2>
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label for="password">Wachtwoord:</label>
       <input type="password" id="password" name="password" required>
       <a href="register.php" class="forgot">Wachtwoord vergeten?</a>
-      <button type="submit">Inlog Knop</button>
+      <button type="submit">Inloggen</button>
     </form>
     </div>
   </div>

@@ -2,6 +2,8 @@
 // Haal het 'id' parameter uit de URL op en sla het op in een variabele
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
+session_start();
+
 // DEBUG
 // echo $id;
 
@@ -29,18 +31,36 @@ try {
 <body>
     <header>
     <div class="logo">
-      <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
-      <span>Energie Transitie</span>
+        <a href="../index.php"><img src="../images/logo.png" alt="Energie logo" /></a>
+        <span>Energie Transitie</span>
     </div>
     <nav>
-      <a id="../login-text" href="login.php">Inloggen</a>
-      <a id="../register-text" href="register.php">Registreren</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <?php
+                $role = $_SESSION['role'];
+                if ($role === 'klant') {
+                    echo '<a href="../klant_dashboard.php">Dashboard</a>';
+                } else {
+                    echo '<a href="../admin_dashboard.php">Dashboard</a>';
+                }
+            ?>
+            <a href="../logout.php">Uitloggen</a>
+        <?php else: ?>
+            <a href="../login.php">Inloggen</a>
+            <a href="../register.php">Registreren</a>
+        <?php endif; ?>
     </nav>
-  </header>
+</header>
 
+  <main>
     <h2>Huis Data - <?php echo $id; ?></h2>
+
+    <a id="terug-button" href="../admin_dashboard.php">&larr; Terug</a> <br> <br>
+
+    <button>
+        <a href="upload_data.php?id=<?php echo $id; ?>">Upload Data</a>
+    </button>
     
-    <a href="upload_data.php?id=<?php echo $id; ?>">Upload Data</a>
     <table>
         <tr>
             <th>Tijdstip</th>
@@ -77,5 +97,8 @@ try {
         </tr>
         <?php endforeach; ?>
     </table>
+    </main>
+
+    
 </body>
 </html>

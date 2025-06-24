@@ -17,6 +17,7 @@ $huizen = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle huizen in een array opslaan
 <head>
     <meta charset="UTF-8">
     <title>Energie Transitie</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="CSS/admindash.css">
 </head>
 <body>
@@ -44,6 +45,9 @@ $huizen = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle huizen in een array opslaan
 </header>
 
     <main>
+        <button>
+            <a href="functions/create_huis.php">Nieuw Huis Toevoegen</a>
+        </button>
         <table>
             <thead>
                 <tr>

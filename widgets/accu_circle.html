@@ -1,0 +1,46 @@
+<div>
+  <h4>Accu Niveau</h4>
+  <canvas id="accuChart"></canvas>
+</div>
+<script>
+fetch('data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    if (data && data.length > 0) {
+      const latest = data[0];
+      const accuValue = latest.Accuniveau_percent;
+      
+      const ctx = document.getElementById('accuChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [accuValue, 100 - accuValue],
+            backgroundColor: [
+              accuValue > 60 ? '#4CAF50' : accuValue > 30 ? '#FF9800' : '#F44336',
+              '#E0E0E0'
+            ],
+            borderWidth: 0,
+            cutout: '75%'
+          }]
+        },
+        options: {
+          responsive: true,
+          rotation: -90,
+          circumference: 180,
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }
+          },
+          animation: {
+            animateRotate: true,
+            duration: 1000
+          }
+        }
+      });
+    }
+  })
+  .catch(error => {
+    console.error('Error loading accu data:', error);
+  });
+</script>

@@ -1,0 +1,38 @@
+<div>
+  <h4>Waterstof Opslag Auto</h4>
+  <canvas id="waterstofAutoChart"></canvas>
+</div>
+<script>
+fetch('data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    const recent = data.slice(0, 20).reverse();
+    const labels = recent.map(row => row.Tijdstip);
+    const waterstofauto = recent.map(row => row.Waterstofopslag_auto_percent);
+
+    const ctx = document.getElementById('waterstofAutoChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Auto (%)',
+          data: waterstofauto,
+          borderColor: 'rgb(255, 102, 102)',
+        //   backgroundColor: 'rgb(75, 192, 192)',
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Waterstof Opslag Auto' }
+        },
+        scales: {
+          y: { title: { display: true, text: '%' } }
+        }
+      }
+    });
+  });
+</script>

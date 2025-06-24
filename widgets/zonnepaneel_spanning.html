@@ -1,0 +1,38 @@
+<div>
+  <h4>Zonnepaneel Spanning</h4>
+  <canvas id="zonnepaneelSpanningChart"></canvas>
+</div>
+<script>
+fetch('data_get.php/energietransitie_data')
+  .then(res => res.json())
+  .then(data => {
+    const recent = data.slice(0, 20).reverse();
+    const labels = recent.map(row => row.Tijdstip);
+    const zonnenpaneelSpanning = recent.map(row => row.Zonnepaneelspanning_V);
+
+    const ctx = document.getElementById('zonnepaneelSpanningChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Spanning (V)',
+          data: zonnenpaneelSpanning,
+          borderColor: 'orange',
+            backgroundColor: 'rgba(255,165,0,0.1)',
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Zonnepaneel Spanning' }
+        },
+        scales: {
+          y: { title: { display: true, text: 'V' } }
+        }
+      }
+    });
+  });
+</script>

@@ -41,6 +41,10 @@ session_start();
       <label>
         <input type="checkbox" id="editToggle" class="editBox"> Edit Mode
       </label>
+
+      <div>
+        <a href="functions/delete_account.php?id=<?php echo $_SESSION['user_id']; ?>" onclick="return confirm('Weet je zeker dat je je account wilt verwijderen?')">Delete</a>
+      </div>
     </div>
     <div id="dashboard"></div>
   </div>

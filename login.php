@@ -77,9 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </header>
 
   <main>
-  <div class="left">
-    <img src="images/logo.png" alt="Zon, windmolens, zonnepanelen">
-  </div>
+  
+    
   <div class="right">
     <div class="login-box">
     <h2>Inloggen</h2>
@@ -92,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label for="password">Wachtwoord:</label>
       <input type="password" id="password" name="password" required>
       <a href="register.php" class="forgot">Wachtwoord vergeten?</a>
-      <button type="submit">Inlog Knop</button>
+      <button type="submit">Inloggen</button>
     </form>
     </div>
   </div>

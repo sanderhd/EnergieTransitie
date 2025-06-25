@@ -18,6 +18,10 @@ session_start();
       <a href="index.php"><img src="images/logo.png" alt="Energie logo" /></a>
       <span>Energie Transitie</span>
     </div>
+    <div class="account-info">
+      <a class="account" href="account.php">👤</a>  
+     
+    </div>
     <nav>
       <?php if (isset($_SESSION['user_id'])): ?>
         <?php
@@ -41,6 +45,8 @@ session_start();
       <label>
         <input type="checkbox" id="editToggle" class="editBox"> Edit Mode
       </label>
+
+    
     </div>
     <div id="dashboard"></div>
   </div>

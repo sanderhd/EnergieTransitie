@@ -49,6 +49,7 @@ nav a {
   font-weight: 500;
   font-size: 20px;
   display: inline-block;
+  text-decoration: none;
 }
 
 /* Dashboard container */
@@ -254,6 +255,14 @@ label {
   gap: 8px;
 }
 
+.account {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #2d7a5f;
+  font-weight: bold;
+}
+
 .editBox {
   --primary-color: #2d7a5f;
   --secondary-color: #fff;
@@ -327,7 +336,15 @@ label {
   transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
 }
 
-/* actions */
+.account {
+  margin-left: 1020px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 28px;
+  padding: 12px 28px;
+}
+
 
 .editBox:hover {
   border-color: var(--primary-color);

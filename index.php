@@ -2,6 +2,13 @@
 // Session starten voor de navbar
 session_start();
 
+// Controleer op verwijderingsbericht
+$deleteMessage = '';
+if (isset($_SESSION['delete_message'])) {
+    $deleteMessage = $_SESSION['delete_message'];
+    unset($_SESSION['delete_message']); // Verwijder het bericht na weergave
+}
+
 // Database verbinding importeren
 require_once 'db_conn.php';
 
@@ -49,6 +56,14 @@ $ervaring = floor((time() - strtotime('2025-06-17')) / (60 * 60 * 24));
         <?php endif; ?>
     </nav>
 </header>
+
+<?php if (!empty($deleteMessage)): ?>
+    <div class="notification success">
+        <?php echo htmlspecialchars($deleteMessage); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($successMessage)) echo $successMessage; ?>
 
 <div class="banner">
    <main>

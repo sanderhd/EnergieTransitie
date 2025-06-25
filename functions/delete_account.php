@@ -20,13 +20,15 @@ $stmt = $conn->prepare("DELETE FROM users WHERE id = :id");
 $stmt->bindParam(':id', $huisId, PDO::PARAM_INT);
 
 if ($stmt->execute()) {
-
+    // Stel een succesbericht in voordat we de sessie vernietigen
+    $_SESSION['delete_message'] = "Uw account is succesvol verwijderd.";    
+    session_write_close(); // Zorg ervoor dat het bericht wordt opgeslagen
+    
     session_unset();
     session_destroy();
-    header("Location: ../login.php");
+    header("Location: ../index.php"); // Verander de redirect naar index.php
     exit();
 } else {
-
     echo "Fout bij het verwijderen van het account..";
 }
 ?>

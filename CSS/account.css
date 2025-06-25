@@ -135,6 +135,7 @@ button:hover {
   background-color: #379683;
 }
 
+
 a[href*="delete_account"] {
   display: inline-block;
   margin-top: 15px;

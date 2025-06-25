@@ -19,7 +19,7 @@ session_start();
       <span>Energie Transitie</span>
     </div>
     <div class="account-info">
-      <a href="account.php">👤</a>  
+      <a class="account" href="account.php">👤</a>  
      
     </div>
     <nav>

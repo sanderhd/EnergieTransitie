@@ -1,24 +1,26 @@
 <?php
-require_once '../db_conn.php';
+require_once '../db_conn.php'; // Verbind met de database
 session_start();
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Zet foutafhandeling op uitzonderingen
 
-$huis_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$huis_id = isset($_GET['id']) ? (int)$_GET['id'] : 0; // Haal huis_id uit de URL
 
 if ($huis_id <= 0) {
-    die('Geen geldig huis ID opgegeven in de URL.');
+    die('Geen geldig huis ID opgegeven in de URL.'); // Stop als er geen geldig huis_id is
 }
 
-if (isset($_POST["import"])) {
-    if (isset($_FILES["file"]) && $_FILES["file"]["size"] > 0) {
+if (isset($_POST["import"])) { // Controleer of het formulier is verzonden
+    if (isset($_FILES["file"]) && $_FILES["file"]["size"] > 0) { // Controleer of er een bestand is geüpload
         $fileName = $_FILES["file"]["tmp_name"];
-        $file = fopen($fileName, "r");
+        $file = fopen($fileName, "r"); // Open het CSV-bestand
 
+        // Verwijder bestaande data voor dit huis
         $deleteStmt = $conn->prepare("DELETE FROM energietransitie_data WHERE huis_id = ?");
         $deleteStmt->execute([$huis_id]);
 
-        fgetcsv($file, 10000, ",");
+        fgetcsv($file, 10000, ","); // Sla de headerregel over
 
+        // SQL-query om data toe te voegen aan de tabel
         $sql = "INSERT INTO energietransitie_data (
             huis_id,
             Tijdstip,

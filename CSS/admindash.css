@@ -78,3 +78,40 @@ button {
 button:hover {
     background-color: #cbd3aa;
 }
+
+input {
+  line-height: 28px;
+  padding: 0 1rem;
+  padding: 20px;
+  border-radius: 8px;
+  outline: none;
+  background-color: #fdfde3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #0d0c22;
+  border: none;
+  transition: .3s ease;
+}
+
+input:focus {
+  box-shadow: 0 0 5px #2d7a5f;
+}
+
+.suggest-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 999;
+    width: 810px;
+}
+
+.suggest-box div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggest-box div:hover {
+    background-color: #f2f2f2;
+}

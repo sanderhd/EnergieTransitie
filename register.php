@@ -1,42 +1,44 @@
 <?php
 session_start();
 
+$error_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'db_conn.php';
+  require_once 'db_conn.php';
 
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+  $username = $_POST['username'] ?? '';
+  $password = $_POST['password'] ?? '';
 
-    // Check of gebruiker al bestaat
-    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-    $stmt->execute([$username]);
+  // Check of gebruiker al bestaat
+  $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+  $stmt->execute([$username]);
 
-    if ($stmt->rowCount() === 0) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO users (username, password, huis, role) VALUES (?, ?, 0, 'klant')");
-        $stmt->execute([$username, $hashedPassword]);
-    }
+  if ($stmt->rowCount() > 0) {
+    $error_message = 'Deze gebruikersnaam bestaat al. Kies een andere gebruikersnaam.';
+  } else {
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $conn->prepare("INSERT INTO users (username, password, huis, role) VALUES (?, ?, 0, 'klant')");
+    $stmt->execute([$username, $hashedPassword]);
 
-    // Haal gegevens van gebruiker op
+    // Haal gegevens van nieuwe gebruiker op
     $stmt = $conn->prepare("SELECT id, username, role FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['role'];
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['role'] = $user['role'];
 
-        // Redirect op basis van rol
-        if ($user['role'] === 'admin') {
-            header("Location: admin_dashboard.php");
-        } else if ($user['role'] === 'klant') {
-            header("Location: klant_dashboard.php");
-        } else {
-            header("Location: klant_dashboard.php");
-        }
-        exit;
+      // Redirect op basis van rol
+      if ($user['role'] === 'admin') {
+        header("Location: admin_dashboard.php");
+      } else {
+        header("Location: klant_dashboard.php");
+      }
+      exit;
     }
+  }
 }
 ?>
 
@@ -71,6 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     </nav>
 </header>
+
+<?php if (isset($error_message)) echo $error_message; ?>
 
   <main>
     <div class="left">

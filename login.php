@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($user['role'] === 'klant') {
       header("Location: klant_dashboard.php");
     } else {
-      header("Location: klant_dashboard.php");
+      header("Location: superadmin_dashboard.php");
     }
     exit;
   } else {

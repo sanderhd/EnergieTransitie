@@ -1,7 +1,62 @@
- <?php
-// Session starten voor de navbar
+<?php
 session_start();
+require_once 'db_conn.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userId = $_SESSION['user_id'];
+    $currentUsername = $_SESSION['username'];
+
+    $newUsername = trim($_POST['newename']);
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
+
+    // check of e wachtworden t zelfde zijn
+    if ($password !== $confirmPassword) {
+        echo "<script>alert('Wachtwoorden komen niet overeen.'); window.location.href='account.php';</script>";
+        exit();
+    }
+
+    // ww hashen
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // nieuwe username controle
+    if (!empty($newUsername) && $newUsername !== $currentUsername) {
+        // check of die al bestaat
+        $checkStmt = $conn->prepare("SELECT id FROM users WHERE username = :username AND id != :id");
+        $checkStmt->execute(['username' => $newUsername, 'id' => $userId]);
+
+        if ($checkStmt->rowCount() > 0) {
+            echo "<script>alert('Gebruikersnaam bestaat al.'); window.location.href='account.php';</script>";
+            exit();
+        }
+
+        // update pass en username
+        $stmt = $conn->prepare("UPDATE users SET username = :username, password = :password WHERE id = :id");
+        $stmt->execute([
+            'username' => $newUsername,
+            'password' => $hashedPassword,
+            'id' => $userId
+        ]);
+
+        $_SESSION['username'] = $newUsername;
+    } else {
+        // alleen pass updaten
+        $stmt = $conn->prepare("UPDATE users SET password = :password WHERE id = :id");
+        $stmt->execute([
+            'password' => $hashedPassword,
+            'id' => $userId
+        ]);
+    }
+
+    echo "<script>alert('Account succesvol bijgewerkt.'); window.location.href='account.php';</script>";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

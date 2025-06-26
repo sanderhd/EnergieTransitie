@@ -14,7 +14,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'superadmin') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin Dashboard</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/superadmin.css">
+    <!-- <link rel="stylesheet" href="CSS/style.css">
     <style>
         .section {
             margin: 20px 0;
@@ -45,7 +46,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'superadmin') {
             margin: 10px 0;
             display: inline-block;
         }
-    </style>
+    </style> -->
 </head>
 <body>
     <header>

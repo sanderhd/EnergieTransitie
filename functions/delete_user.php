@@ -91,78 +91,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gebruiker Verwijderen - Energie Transitie</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <style>
-        .confirmation-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .user-info {
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        .user-info h3 {
-            margin-top: 0;
-            color: #495057;
-        }
-        .user-info p {
-            margin: 5px 0;
-        }
-        .warning {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        .danger {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-right: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-        .error {
-            color: red;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="../CSS/delete_user.css">
 </head>
 <body>
     <header>

@@ -94,7 +94,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gebruiker Bewerken - Energie Transitie</title>
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/edituser.css">
+    <!-- <link rel="stylesheet" href="../CSS/style.css">
     <style>
         .form-container {
             max-width: 600px;
@@ -151,7 +152,7 @@ try {
             color: #666;
             margin-top: 5px;
         }
-    </style>
+    </style> -->
 </head>
 <body>
     <header>

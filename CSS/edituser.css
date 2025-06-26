@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: #fdfde3;
+    animation: fadein 1s ease-in-out;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background-color: #fffddf;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: #2d7a5f;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.logo img {
+    width: 90px;
+    height: 90px;
+}
+
+nav a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #2d7a5f;
+    font-weight: 500;
+    font-size: 20px;
+    display: inline-block;
+}
+
+nav a:hover {
+    transition: color 0.3s ease, transform 0.3s ease;
+    animation: hoverEffect 1s infinite alternate, grow 0.3s forwards;
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+}
+
+.account {
+    font-size: 24px;
+    text-decoration: none;
+    color: #2d7a5f;
+    margin-left: 20px;
+}
+
+/* Main Content Styles */
+main {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    min-height: calc(100vh - 160px);
+}
+
+.form-container {
+    max-width: 700px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f9f3cf;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.form-container h2 {
+    color: #2d7a5f;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 30px;
+    background: linear-gradient(90deg, #004225, #3E8E41, #2E7D5B, #1E4D3A);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+    text-align: center;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2d7a5f;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #cdc9ae;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: white;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2d7a5f;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(45, 122, 95, 0.2);
+}
+
+.password-hint {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    background-color: #2d7a5f;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #3E8E41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.button-group {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Error Message */
+.error {
+    color: #721c24;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+/* Animations */
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes hoverEffect {
+    0% { color: #2d7a5f; transform: scale(1); }
+    50% { color: #56c596; transform: scale(1.1); }
+    100% { color: #379683; transform: scale(1.2); }
+}
+
+@keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
